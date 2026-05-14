@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { useTheme } from '../../ThemeContext';
 
 const favoritos = [
   { id: 1, title: 'O Pequeno Príncipe', author: 'Antoine de Saint-Exupéry', image: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=300&q=80' },
@@ -23,19 +24,15 @@ const jaLidos = [
 ];
 
 export default function PerfilScreen() {
+  const { dark, colors } = useTheme();
+
   return (
-    <SafeAreaView style={styles.safe}>
-      <StatusBar barStyle="light-content" backgroundColor="#2F4F4F" />
-      <ScrollView
-        style={styles.container}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContent}
-      >
+    <SafeAreaView style={[styles.safe, { backgroundColor: colors.background }]}>
+      <StatusBar barStyle="light-content" backgroundColor={colors.headerBg} />
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
 
-        {/* Header verde vertical compacto */}
-        <View style={styles.headerBg}>
-
-          {/* Seta + Título */}
+        {/* Header verde compacto */}
+        <View style={[styles.headerBg, { backgroundColor: colors.headerBg }]}>
           <View style={styles.topRow}>
             <TouchableOpacity style={styles.backBtn}>
               <Text style={styles.backText}>←</Text>
@@ -44,7 +41,6 @@ export default function PerfilScreen() {
             <View style={{ width: 44 }} />
           </View>
 
-          {/* Foto centralizada */}
           <View style={styles.avatarContainer}>
             <Image
               source={{ uri: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80' }}
@@ -52,45 +48,44 @@ export default function PerfilScreen() {
             />
           </View>
 
-          {/* Nome e subtítulo centralizados */}
           <Text style={styles.userName}>Victor Gabriel</Text>
-          <Text style={styles.userSubtitle}>Leitor ávido 📚</Text>
+          <Text style={[styles.userSubtitle, { color: colors.accent }]}>Leitor ávido 📚</Text>
 
-          {/* Card lendo agora compacto */}
-          <View style={styles.readingCard}>
+          <View style={[styles.readingCard, { backgroundColor: dark ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.95)' }]}>
             <Image
-              source={{ uri: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200&q=80' }}
+             source={require('@/assets/images/dom-casmurro.jpg')}
               style={styles.readingImage}
             />
             <View style={styles.readingInfo}>
-              <Text style={styles.readingLabel}>Lendo agora</Text>
-              <Text style={styles.readingTitle}>A Rainha Vermelha</Text>
-              <Text style={styles.readingAuthor}>Victoria Aveyard</Text>
+              <Text style={[styles.readingLabel, { color: colors.accent }]}>LENDO AGORA</Text>
+              <Text style={[styles.readingTitle, { color: dark ? '#fff' : '#2F4F4F' }]}>Dom Casmurro</Text>
+              <Text style={[styles.readingAuthor, { color: dark ? '#ccc' : '#888' }]}>Machado de Assis</Text>
               <View style={styles.progressRow}>
-                <Text style={styles.progressLabel}>Progresso</Text>
-                <Text style={styles.progressPercent}>65%</Text>
+                <Text style={[styles.progressLabel, { color: dark ? '#ccc' : '#888' }]}>Progresso</Text>
+                <Text style={[styles.progressPercent, { color: dark ? '#fff' : '#2F4F4F' }]}>65%</Text>
               </View>
-              <View style={styles.progressBarBg}>
-                <View style={[styles.progressBarFill, { width: '65%' }]} />
+              <View style={[styles.progressBarBg, { backgroundColor: dark ? 'rgba(255,255,255,0.2)' : '#E0EAF4' }]}>
+                <View style={[styles.progressBarFill, { width: '65%', backgroundColor: colors.accent }]} />
               </View>
             </View>
           </View>
+
           <Text style={styles.brandText}>Lê-Se</Text>
         </View>
 
         {/* Favoritos */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Favoritos</Text>
+          <Text style={[styles.sectionTitle, { color: colors.title }]}>Favoritos</Text>
           <FlatList
             data={favoritos}
             horizontal
             showsHorizontalScrollIndicator={true}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <TouchableOpacity style={styles.bookCard}>
+              <TouchableOpacity style={[styles.bookCard, { backgroundColor: colors.card, borderColor: colors.border }]}>
                 <Image source={{ uri: item.image }} style={styles.bookImage} />
-                <Text style={styles.bookTitle} numberOfLines={2}>{item.title}</Text>
-                <Text style={styles.bookAuthor} numberOfLines={1}>{item.author}</Text>
+                <Text style={[styles.bookTitle, { color: colors.title }]} numberOfLines={2}>{item.title}</Text>
+                <Text style={[styles.bookAuthor, { color: colors.secondary }]} numberOfLines={1}>{item.author}</Text>
               </TouchableOpacity>
             )}
           />
@@ -98,22 +93,22 @@ export default function PerfilScreen() {
 
         {/* Já Lidos */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Já Lidos</Text>
+          <Text style={[styles.sectionTitle, { color: colors.title }]}>Já Lidos</Text>
           <FlatList
             data={jaLidos}
             horizontal
             showsHorizontalScrollIndicator={true}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <TouchableOpacity style={styles.bookCard}>
+              <TouchableOpacity style={[styles.bookCard, { backgroundColor: colors.card, borderColor: colors.border }]}>
                 <View style={styles.badgeContainer}>
-                  <View style={styles.badge}>
+                  <View style={[styles.badge, { backgroundColor: colors.accent }]}>
                     <Text style={styles.badgeText}>✓</Text>
                   </View>
                 </View>
                 <Image source={{ uri: item.image }} style={styles.bookImage} />
-                <Text style={styles.bookTitle} numberOfLines={2}>{item.title}</Text>
-                <Text style={styles.bookAuthor} numberOfLines={1}>{item.author}</Text>
+                <Text style={[styles.bookTitle, { color: colors.title }]} numberOfLines={2}>{item.title}</Text>
+                <Text style={[styles.bookAuthor, { color: colors.secondary }]} numberOfLines={1}>{item.author}</Text>
               </TouchableOpacity>
             )}
           />
@@ -125,84 +120,40 @@ export default function PerfilScreen() {
 }
 
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: '#FFFAF0' },
+  safe: { flex: 1 },
   container: { flex: 1 },
   scrollContent: { paddingBottom: 40 },
-
- headerBg: {
-  backgroundColor: '#2F4F4F',
-  paddingTop: 30,
-  paddingBottom:50,
-  paddingHorizontal: 30,
-  alignItems: 'center',
-  borderBottomLeftRadius: 28,
-  borderBottomRightRadius: 28,
-  marginHorizontal: 35,  // ← faz ele ficar menor lateralmente
-  marginTop: 25,
-  borderRadius: 5,
-},
-  topRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
-    marginBottom: 15,
+  headerBg: {
+    paddingTop: 40, paddingBottom: 25, paddingHorizontal: 30,
+    alignItems: 'center', marginHorizontal: 35, marginTop: 10, borderRadius: 25,
   },
-  backBtn: {
-    width: 44, height: 44,
-    alignItems: 'center', justifyContent: 'center',
-  },
+  topRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%', marginBottom: 12 },
+  backBtn: { width: 44, height: 44, alignItems: 'center', justifyContent: 'center' },
   backText: { color: '#fff', fontSize: 28, fontWeight: 'bold' },
-  headerTitle: { color: '#fff', fontSize: 18, fontWeight: 'bold', fontFamily: 'georgia' },
-
-  avatarContainer: {
-    width:100, height: 100, borderRadius: 100,
-    borderWidth: 3, borderColor: '#66CDAA',
-    overflow: 'hidden', marginBottom: 8,
-  },
+  headerTitle: { color: '#fff', fontSize: 18, fontWeight: 'bold', fontFamily: 'Georgia' },
+  avatarContainer: { width: 90, height: 90, borderRadius: 45, borderWidth: 3, borderColor: '#66CDAA', overflow: 'hidden', marginBottom: 8 },
   avatar: { width: '100%', height: '100%' },
   userName: { color: '#fff', fontSize: 18, fontWeight: 'bold', marginBottom: 2, fontFamily: 'Georgia' },
-userSubtitle: { color: '#66CDAA', fontSize: 13, marginBottom: 14, fontFamily: 'Georgia', fontStyle: 'italic' },
-
-  readingCard: {
-    flexDirection: 'row',
-    backgroundColor: 'rgba(255,255,255,0.15)',
-    borderRadius: 14, padding: 10, width: '100%',
-  },
-  brandText: { 
-  color: '#FFFAF0', 
-  fontSize: 25, 
-  fontFamily: 'serif',
-  marginTop: 30,
-  opacity: 0.9,
-},
+  userSubtitle: { fontSize: 13, marginBottom: 14, fontFamily: 'Georgia', fontStyle: 'italic' },
+  readingCard: { flexDirection: 'row', borderRadius: 20, padding: 12, width: '100%', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 8, elevation: 3 },
   readingImage: { width: 60, height: 80, borderRadius: 8, marginRight: 10 },
   readingInfo: { flex: 1, justifyContent: 'center' },
-  readingLabel: { color: '#66CDAA', fontSize: 11, marginBottom: 3 },
-  readingTitle: { color: '#fff', fontSize: 13, fontWeight: 'bold', marginBottom: 2 },
-  readingAuthor: { color: '#ccc', fontSize: 11, marginBottom: 6 },
-  progressRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 3 },
-  progressLabel: { fontSize: 11, color: '#ccc' },
-  progressPercent: { fontSize: 11, color: '#fff', fontWeight: '600' },
-  progressBarBg: { height: 5, backgroundColor: 'rgba(255,255,255,0.2)', borderRadius: 4 },
-  progressBarFill: { height: 5, backgroundColor: '#66CDAA', borderRadius: 4 },
-
-  section: { paddingHorizontal: 16, paddingTop: 20 },
-  sectionTitle: { fontSize: 17, fontWeight: 'bold', color: '#2F4F4F', marginBottom: 14 },
-
-  bookCard: {
-    width: 150, backgroundColor: '#fff',
-    borderRadius: 14, overflow: 'hidden',
-    marginRight: 12, borderWidth: 1, borderColor: '#E0EAF4',
-  },
+  readingLabel: { fontSize: 10, marginBottom: 4, letterSpacing: 0.5, fontWeight: '600' },
+  readingTitle: { fontSize: 14, fontWeight: '600', marginBottom: 2 },
+  readingAuthor: { fontSize: 11, marginBottom: 8 },
+  progressRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 4 },
+  progressLabel: { fontSize: 11 },
+  progressPercent: { fontSize: 11, fontWeight: '600' },
+  progressBarBg: { height: 5, borderRadius: 4 },
+  progressBarFill: { height: 5, borderRadius: 4 },
+  brandText: { color: '#FFFAF0', fontSize: 26, fontFamily: 'serif', marginTop: 16, opacity: 0.9 },
+  section: { paddingHorizontal: 16, paddingTop: 24 },
+  sectionTitle: { fontSize: 17, fontWeight: 'bold', marginBottom: 14 },
+  bookCard: { width: 150, borderRadius: 14, overflow: 'hidden', marginRight: 12, borderWidth: 1 },
   bookImage: { width: '100%', height: 160 },
-  bookTitle: { fontSize: 13, fontWeight: 'bold', color: '#2F4F4F', padding: 8, paddingBottom: 2 },
-  bookAuthor: { fontSize: 12, color: '#5A7A94', paddingHorizontal: 8, paddingBottom: 8 },
-
+  bookTitle: { fontSize: 13, fontWeight: 'bold', padding: 8, paddingBottom: 2 },
+  bookAuthor: { fontSize: 12, paddingHorizontal: 8, paddingBottom: 8 },
   badgeContainer: { position: 'absolute', top: 8, right: 8, zIndex: 1 },
-  badge: {
-    backgroundColor: '#66CDAA', width: 24, height: 24,
-    borderRadius: 12, alignItems: 'center', justifyContent: 'center',
-  },
+  badge: { width: 24, height: 24, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
   badgeText: { color: '#fff', fontSize: 12, fontWeight: 'bold' },
 });

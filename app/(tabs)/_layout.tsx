@@ -1,19 +1,24 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { Image } from 'react-native';
+import { ThemeProvider, useTheme } from '../../ThemeContext';
 
-export default function TabLayout() {
+function TabLayoutInner() {
+  const { colors } = useTheme();
+
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarStyle: {
-          backgroundColor: '#FFFAF0',
-          borderTopColor: '#66CDAA',
-          borderTopWidth: 1,
-          height: 60,
-        },
         tabBarShowLabel: false,
+        tabBarStyle: {
+          backgroundColor: colors.background,
+          borderTopColor: colors.accent,
+          borderTopWidth: 1,
+          height: 90,
+          paddingBottom: 10,
+          paddingTop: 8,
+        },
       }}
     >
       <Tabs.Screen
@@ -22,7 +27,7 @@ export default function TabLayout() {
           tabBarIcon: ({ focused }) => (
             <Image
               source={require('@/assets/images/biblioteca.png')}
-              style={{ width: 26, height: 26, tintColor: '#2F4F4F', opacity: focused ? 1 : 0.4 }}
+              style={{ width: 35, height: 28, tintColor: colors.title, opacity: focused ? 1 : 0.4 }}
             />
           ),
         }}
@@ -33,7 +38,7 @@ export default function TabLayout() {
           tabBarIcon: ({ focused }) => (
             <Image
               source={require('@/assets/images/explorar.png')}
-              style={{ width: 26, height: 26, tintColor: '#2F4F4F', opacity: focused ? 1 : 0.4 }}
+              style={{ width: 28, height: 28, tintColor: colors.title, opacity: focused ? 1 : 0.4 }}
             />
           ),
         }}
@@ -44,11 +49,19 @@ export default function TabLayout() {
           tabBarIcon: ({ focused }) => (
             <Image
               source={require('@/assets/images/perfil.png')}
-              style={{ width: 26, height: 26, tintColor: '#2F4F4F', opacity: focused ? 1 : 0.4 }}
+              style={{ width: 28, height: 28, tintColor: colors.title, opacity: focused ? 1 : 0.4 }}
             />
           ),
         }}
       />
     </Tabs>
+  );
+}
+
+export default function TabLayout() {
+  return (
+    <ThemeProvider>
+      <TabLayoutInner />
+    </ThemeProvider>
   );
 }
