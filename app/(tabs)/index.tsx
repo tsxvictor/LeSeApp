@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import { useRouter } from 'expo-router';
+=======
+>>>>>>> ec4df88f64e2ac6870fc1ebb877b519050aa978d
 import React, { useState } from 'react';
 import {
   Image, SafeAreaView,
@@ -50,6 +53,7 @@ const allBooks = {
 export default function HomeScreen() {
   const { dark, toggle, colors } = useTheme();
   const [selectedCategory, setSelectedCategory] = useState('Ficção Científica');
+<<<<<<< HEAD
   const router = useRouter();
 
   const getGreeting = () => {
@@ -57,14 +61,25 @@ export default function HomeScreen() {
     if (hour < 12) return 'Bom dia! ☀️';
     if (hour < 18) return 'Boa tarde! 🌤️';
     return 'Boa noite! 🌙';
+=======
+
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Bom dia, Victor! ';
+    if (hour < 18) return 'Boa tarde, Victor! ';
+    return 'Boa noite, Victor! ';
+>>>>>>> ec4df88f64e2ac6870fc1ebb877b519050aa978d
   };
 
   const livrosFiltrados = allBooks[selectedCategory as keyof typeof allBooks];
 
+<<<<<<< HEAD
   const openBook = (title: string, author: string) => {
     router.push({ pathname: '/book', params: { title, author } });
   };
 
+=======
+>>>>>>> ec4df88f64e2ac6870fc1ebb877b519050aa978d
   return (
     <SafeAreaView style={[styles.safe, { backgroundColor: colors.background }]}>
       <StatusBar barStyle={dark ? 'light-content' : 'dark-content'} backgroundColor={colors.background} />
@@ -85,12 +100,21 @@ export default function HomeScreen() {
         </View>
 
         {/* Continue Reading Card */}
+<<<<<<< HEAD
         <TouchableOpacity
           style={[styles.readingCard, { backgroundColor: colors.headerBg }]}
           onPress={() => openBook('Dom Casmurro', 'Machado de Assis')}
         >
           <View style={styles.readingContent}>
             <Image source={require('@/assets/images/dom-casmurro.jpg')} style={styles.readingImage} />
+=======
+        <View style={[styles.readingCard, { backgroundColor: colors.headerBg }]}>
+          <View style={styles.readingContent}>
+            <Image
+              source={require('@/assets/images/dom-casmurro.jpg')}
+              style={styles.readingImage}
+            />
+>>>>>>> ec4df88f64e2ac6870fc1ebb877b519050aa978d
             <View style={styles.readingInfo}>
               <Text style={[styles.readingLabel, { color: colors.accent }]}>CONTINUAR LENDO</Text>
               <Text style={styles.readingTitle}>Dom Casmurro</Text>
@@ -103,7 +127,11 @@ export default function HomeScreen() {
           <View style={styles.progressBarBg}>
             <View style={[styles.progressBarFill, { width: '65%', backgroundColor: colors.accent }]} />
           </View>
+<<<<<<< HEAD
         </TouchableOpacity>
+=======
+        </View>
+>>>>>>> ec4df88f64e2ac6870fc1ebb877b519050aa978d
 
         {/* Quote of the Day */}
         <View style={[styles.quoteCard, { backgroundColor: colors.card, borderLeftColor: colors.accent }]}>
@@ -127,9 +155,13 @@ export default function HomeScreen() {
                 ]}
                 onPress={() => setSelectedCategory(cat)}
               >
+<<<<<<< HEAD
                 <Text style={styles.categoryIcon}>
                   {cat === 'Ficção Científica' ? '' : cat === 'Romance' ? '' : cat === 'Mistério' ? '' : ''}
                 </Text>
+=======
+                <Text style={styles.categoryIcon}></Text>
+>>>>>>> ec4df88f64e2ac6870fc1ebb877b519050aa978d
                 <Text style={[styles.categoryText, { color: selectedCategory === cat ? '#fff' : colors.text }]}>
                   {cat}
                 </Text>
@@ -138,6 +170,7 @@ export default function HomeScreen() {
           </View>
         </View>
 
+<<<<<<< HEAD
         {/* Books Grid */}
         <View style={styles.section}>
           <View style={styles.booksGrid}>
@@ -147,6 +180,17 @@ export default function HomeScreen() {
                 style={[styles.bookCard, { backgroundColor: colors.card, borderColor: colors.border }]}
                 onPress={() => openBook(book.title, book.author)}
               >
+=======
+        {/* Recommended */}
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+          
+            <Text style={styles.trendIcon}></Text>
+          </View>
+          <View style={styles.booksGrid}>
+            {livrosFiltrados.map((book) => (
+              <TouchableOpacity key={book.id} style={[styles.bookCard, { backgroundColor: colors.card, borderColor: colors.border }]}>
+>>>>>>> ec4df88f64e2ac6870fc1ebb877b519050aa978d
                 <Image source={book.cover} style={styles.bookImage} />
                 <Text style={[styles.bookTitle, { color: colors.title }]} numberOfLines={2}>{book.title}</Text>
                 <Text style={[styles.bookAuthor, { color: colors.secondary }]} numberOfLines={1}>{book.author}</Text>
@@ -184,7 +228,13 @@ const styles = StyleSheet.create({
   quoteText: { fontSize: 13, fontStyle: 'italic', fontFamily: 'Georgia', marginBottom: 8, lineHeight: 20 },
   quoteAuthor: { fontSize: 11, textAlign: 'right' },
   section: { marginBottom: 8 },
+<<<<<<< HEAD
   sectionTitle: { fontSize: 16, fontWeight: 'bold', marginBottom: 12 },
+=======
+  sectionHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: -30},
+  sectionTitle: { fontSize: 16, fontWeight: 'bold', marginBottom: 12 },
+  trendIcon: { fontSize: 18, marginLeft: 6 },
+>>>>>>> ec4df88f64e2ac6870fc1ebb877b519050aa978d
   categoriesGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginBottom: 20 },
   categoryBtn: { flexDirection: 'row', alignItems: 'center', borderRadius: 10, paddingHorizontal: 16, paddingVertical: 10, width: '47%', borderWidth: 1 },
   categoryIcon: { fontSize: 14, marginRight: 6 },
