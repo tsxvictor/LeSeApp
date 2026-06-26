@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/images/icon.png" width="120" alt="Lê-Se Logo" />
+<img src="assets/images/detetive.png" width="120" alt="Lê-Se Logo" />
 
 # 📚 Lê-Se
 
