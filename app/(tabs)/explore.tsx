@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import {
   FlatList,
-  Image, SafeAreaView,
+  Image,
+  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
-  Text, TextInput,
+  Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { useTheme } from '../../ThemeContext';
 
 const trendingBooks = [
-<<<<<<< HEAD
   { id: 1, title: 'Orgulho e Preconceito', author: 'Antoine de Saint-Exupéry', image: require('@/assets/images/orgulho-e-preconceito.jpg'), rating: 4.8 },
   { id: 2, title: 'O Corvo', author: 'Gabriel García Márquez', image: require('@/assets/images/o-corvo.jpg'), rating: 4.9 },
   { id: 3, title: 'A Metamorfose', author: 'Franz Kafka', image: require('@/assets/images/a-metamorfose.jpg'), rating: 4.6 },
@@ -20,89 +21,44 @@ const trendingBooks = [
 ];
 
 const collections = [
-  {
-    id: 1,
-    title: 'Livros para Relaxar',
-    image: require('@/assets/images/livros-para-relaxar.jpg'),
-  },
-  {
-    id: 2,
-    title: 'Clássicos Brasileiros',
-    image: require('@/assets/images/classicos-brasileiros.png'),
-  },
-  {
-    id: 3,
-    title: 'Ficção Científica',
-    image: require('@/assets/images/ficcao-cientifica.png'),
-  },
-  {
-    id: 4,
-    title: 'Romance Contemporâneo',
-    image: require('@/assets/images/romance-contemporaneo.png'),
-  },
+  { id: 1, title: 'Livros para Relaxar', image: require('@/assets/images/livros-para-relaxar.jpg') },
+  { id: 2, title: 'Clássicos Brasileiros', image: require('@/assets/images/classicos-brasileiros.png') },
+  { id: 3, title: 'Ficção Científica', image: require('@/assets/images/ficcao-cientifica.png') },
+  { id: 4, title: 'Romance Contemporâneo', image: require('@/assets/images/romance-contemporaneo.png') },
 ];
 
 const featuredAuthors = [
   { id: 1, name: 'Machado de Assis', genre: 'Brasil', image: require('@/assets/images/machado-de-assis.jpg') },
-  { id: 2, name: 'H.G. Wells', genre: 'Reino Unido',image: require('@/assets/images/h.g-wells.jpg')},
-  { id: 3, name: 'Júlio Verne', genre: 'França', image: require('@/assets/images/julio-verne.jpg')},
+  { id: 2, name: 'H.G. Wells', genre: 'Reino Unido', image: require('@/assets/images/h.g-wells.jpg') },
+  { id: 3, name: 'Júlio Verne', genre: 'França', image: require('@/assets/images/julio-verne.jpg') },
   { id: 4, name: 'Emily Brontë', genre: 'Reino Unido', image: require('@/assets/images/emily-bronte.jpg') },
-=======
-  { id: 1, title: 'O Pequeno Príncipe', author: 'Antoine de Saint-Exupéry', cover: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=300&h=450&fit=crop', rating: 4.8 },
-  { id: 2, title: 'Cem Anos de Solidão', author: 'Gabriel García Márquez', cover: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=300&h=450&fit=crop', rating: 4.9 },
-  { id: 3, title: 'A Metamorfose', author: 'Franz Kafka', cover: 'https://images.unsplash.com/photo-1589998059171-988d887df646?w=300&h=450&fit=crop', rating: 4.6 },
-  { id: 4, title: '1984', author: 'George Orwell', cover: 'https://images.unsplash.com/photo-1495640388908-05fa85288e61?w=300&h=450&fit=crop', rating: 4.7 },
-];
-
-const collections = [
-  { id: 1, title: 'Livros para Relaxar', image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop' },
-  { id: 2, title: 'Clássicos Brasileiros', image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop' },
-  { id: 3, title: 'Ficção Científica', image: 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=400&h=300&fit=crop' },
-  { id: 4, title: 'Romance Contemporâneo', image: 'https://images.unsplash.com/photo-1474932430478-367dbb6832c1?w=400&h=300&fit=crop' },
-];
-
-const featuredAuthors = [
-  { id: 1, name: 'Machado de Assis', genre: 'Literatura Brasileira', photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop' },
-  { id: 2, name: 'Clarice Lispector', genre: 'Ficção Contemporânea', photo: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop' },
-  { id: 3, name: 'Jorge Amado', genre: 'Romance Regional', photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop' },
-  { id: 4, name: 'Cecília Meireles', genre: 'Poesia', photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop' },
->>>>>>> ec4df88f64e2ac6870fc1ebb877b519050aa978d
 ];
 
 export default function ExploreScreen() {
   const { dark, colors } = useTheme();
   const [search, setSearch] = useState('');
 
-<<<<<<< HEAD
   const livrosFiltrados = trendingBooks.filter(
-  (book) =>
-    book.title.toLowerCase().includes(search.toLowerCase()) ||
-    book.author.toLowerCase().includes(search.toLowerCase())
-);
-  const autoresFiltrados = featuredAuthors.filter(
-  (author) =>
-    author.name.toLowerCase().includes(search.toLowerCase()) ||
-    author.genre.toLowerCase().includes(search.toLowerCase())
-);
+    (book) =>
+      book.title.toLowerCase().includes(search.toLowerCase()) ||
+      book.author.toLowerCase().includes(search.toLowerCase())
+  );
 
-=======
->>>>>>> ec4df88f64e2ac6870fc1ebb877b519050aa978d
+  const autoresFiltrados = featuredAuthors.filter(
+    (author) =>
+      author.name.toLowerCase().includes(search.toLowerCase()) ||
+      author.genre.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <SafeAreaView style={[styles.safe, { backgroundColor: colors.background }]}>
       <StatusBar barStyle={dark ? 'light-content' : 'dark-content'} backgroundColor={colors.background} />
 
       {/* Imagem decorativa de fundo */}
-<<<<<<< HEAD
       <Image
         source={require('@/assets/images/detetive.png')}
         style={[styles.bgImage, { opacity: dark ? 0.10 : 0.80 }]}
       />
-=======
-   <Image
-  source={require('@/assets/images/detetive.png')}
-  style={[styles.bgImage, { opacity: dark ? 0.10 : 0.80 }]}
-/>
->>>>>>> ec4df88f64e2ac6870fc1ebb877b519050aa978d
 
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
 
@@ -126,21 +82,13 @@ export default function ExploreScreen() {
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.title }]}>Mais Buscados</Text>
           <FlatList
-<<<<<<< HEAD
             data={livrosFiltrados}
-=======
-            data={trendingBooks}
->>>>>>> ec4df88f64e2ac6870fc1ebb877b519050aa978d
             horizontal
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <TouchableOpacity style={[styles.bookCard, { backgroundColor: colors.card, borderColor: colors.border }]}>
-<<<<<<< HEAD
                 <Image source={item.image} style={styles.bookCover} />
-=======
-                <Image source={{ uri: item.cover }} style={styles.bookCover} />
->>>>>>> ec4df88f64e2ac6870fc1ebb877b519050aa978d
                 <Text style={[styles.bookTitle, { color: colors.title }]} numberOfLines={2}>{item.title}</Text>
                 <Text style={[styles.bookAuthor, { color: colors.secondary }]} numberOfLines={1}>{item.author}</Text>
                 <View style={styles.ratingRow}>
@@ -150,11 +98,7 @@ export default function ExploreScreen() {
               </TouchableOpacity>
             )}
           />
-<<<<<<< HEAD
-        </View>shift + t
-=======
         </View>
->>>>>>> ec4df88f64e2ac6870fc1ebb877b519050aa978d
 
         {/* Coleções */}
         <View style={styles.section}>
@@ -162,11 +106,7 @@ export default function ExploreScreen() {
           <View style={styles.collectionsGrid}>
             {collections.map((item) => (
               <TouchableOpacity key={item.id} style={styles.collectionCard}>
-<<<<<<< HEAD
                 <Image source={item.image} style={styles.collectionImage} />
-=======
-                <Image source={{ uri: item.image }} style={styles.collectionImage} />
->>>>>>> ec4df88f64e2ac6870fc1ebb877b519050aa978d
                 <View style={styles.collectionOverlay}>
                   <Text style={styles.collectionTitle}>{item.title}</Text>
                 </View>
@@ -179,22 +119,14 @@ export default function ExploreScreen() {
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.title }]}>Autores em Destaque</Text>
           <FlatList
-<<<<<<< HEAD
             data={autoresFiltrados}
-=======
-            data={featuredAuthors}
->>>>>>> ec4df88f64e2ac6870fc1ebb877b519050aa978d
             horizontal
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <TouchableOpacity style={styles.authorCard}>
                 <View style={[styles.authorAvatarContainer, { borderColor: colors.accent }]}>
-<<<<<<< HEAD
                   <Image source={item.image} style={styles.authorAvatar} />
-=======
-                  <Image source={{ uri: item.photo }} style={styles.authorAvatar} />
->>>>>>> ec4df88f64e2ac6870fc1ebb877b519050aa978d
                 </View>
                 <Text style={[styles.authorName, { color: colors.title }]} numberOfLines={2}>{item.name}</Text>
                 <Text style={[styles.authorGenre, { color: colors.accent }]} numberOfLines={1}>{item.genre}</Text>
@@ -218,17 +150,9 @@ const styles = StyleSheet.create({
     top: 15,
     width: 400,
     height: 400,
-<<<<<<< HEAD
     zIndex: 0,
   },
   header: { paddingHorizontal: 16, paddingTop: 50, marginTop: 120 },
-=======
-    opacity: 0.70,
-    zIndex: 0,
-    
-  },
-  header: { paddingHorizontal: 16, paddingTop: 50, marginTop: 120},
->>>>>>> ec4df88f64e2ac6870fc1ebb877b519050aa978d
   headerTitle: { fontSize: 30, fontWeight: 'bold', fontFamily: 'serif', marginBottom: 4 },
   headerSubtitle: { fontSize: 14, fontStyle: 'italic', fontFamily: 'Georgia', marginBottom: 16 },
   searchBox: { flexDirection: 'row', alignItems: 'center', borderRadius: 12, paddingHorizontal: 12, paddingVertical: 10, borderWidth: 1 },
@@ -246,20 +170,23 @@ const styles = StyleSheet.create({
   collectionsGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
   collectionCard: { width: '47%', height: 120, borderRadius: 14, overflow: 'hidden' },
   collectionImage: { width: '100%', height: '100%' },
-  collectionOverlay: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(47,79,79,0.6)', alignItems: 'center', justifyContent: 'center', padding: 8 },
-<<<<<<< HEAD
+  collectionOverlay: {
+    position: 'absolute',
+    top: 0, left: 0, right: 0, bottom: 0,
+    backgroundColor: 'rgba(47,79,79,0.6)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 8,
+  },
   collectionTitle: {
-  color: '#fff',
-  fontSize: 13,
-  fontWeight: 'bold',
-  textAlign: 'center',
-  textShadowColor: '#000',
-  textShadowOffset: { width: 10, height: 1 },
-  textShadowRadius: 4,
-},
-=======
-  collectionTitle: { color: '#fff', fontSize: 13, fontWeight: 'bold', textAlign: 'center' },
->>>>>>> ec4df88f64e2ac6870fc1ebb877b519050aa978d
+    color: '#fff',
+    fontSize: 13,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    textShadowColor: '#000',
+    textShadowOffset: { width: 10, height: 1 },
+    textShadowRadius: 4,
+  },
   authorCard: { alignItems: 'center', marginRight: 20, width: 80 },
   authorAvatarContainer: { width: 70, height: 70, borderRadius: 35, borderWidth: 3, overflow: 'hidden', marginBottom: 8 },
   authorAvatar: { width: '100%', height: '100%' },
